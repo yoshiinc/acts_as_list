@@ -9,10 +9,6 @@ module ActiveRecord::Acts::List::CallbackDefiner #:nodoc:
       after_destroy :decrement_positions_on_lower_items, unless: Proc.new { destroyed_via_scope? || act_as_list_no_update? }
 
       after_commit :clear_scope_changed
-
-      if add_new_at.present?
-        before_create "add_to_list_#{add_new_at}".to_sym, unless: :act_as_list_no_update?
-      end
     end
   end
 end
